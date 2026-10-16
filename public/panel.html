@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Panel · Kekkai Family</title>
+<link rel="stylesheet" href="panel.css" />
+</head>
+<body>
+<div class="bg-glow"></div>
+
+<!-- LOGIN VIEW -->
+<div id="loginView" class="login-wrap">
+  <div class="login-card">
+    <div class="login-brand">
+      <div class="brand-dot"></div>
+      <div>
+        <div class="brand-title">Panel Kontrol</div>
+        <div class="brand-sub">Seleksi Kekkai Family</div>
+      </div>
+    </div>
+
+    <div class="role-tabs">
+      <button class="role-tab active" data-role="owner">Owner</button>
+      <button class="role-tab" data-role="admin">Admin</button>
+    </div>
+
+    <div class="field"><label>Username</label><input id="lUser" type="text" autocomplete="username" /></div>
+    <div class="field"><label>Password</label><input id="lPass" type="password" autocomplete="current-password" /></div>
+    <button class="btn primary wide" id="btnLogin">Masuk</button>
+    <div class="msg" id="loginMsg"></div>
+  </div>
+</div>
+
+<!-- APP VIEW -->
+<div id="appView" class="app-wrap hidden">
+  <aside class="sidebar">
+    <div class="side-brand">
+      <div class="brand-dot small"></div>
+      <div>
+        <div class="brand-title sm">Kekkai Panel</div>
+        <div class="brand-sub" id="whoami">—</div>
+      </div>
+    </div>
+    <nav class="sidenav">
+      <button class="nav-item active" data-view="dashboard">Dashboard</button>
+      <button class="nav-item" data-view="codes">Kode Seleksi</button>
+      <button class="nav-item" data-view="submissions">Log Verifikasi</button>
+      <button class="nav-item owner-only" data-view="flow">Sistem Seleksi</button>
+      <button class="nav-item owner-only" data-view="site">Situs & Tampilan</button>
+      <button class="nav-item owner-only" data-view="notif">Notifikasi</button>
+      <button class="nav-item owner-only" data-view="admins">Kelola Admin</button>
+    </nav>
+    <button class="btn ghost wide" id="btnLogout">Keluar</button>
+  </aside>
+
+  <main class="main">
+    <!-- DASHBOARD -->
+    <section class="view active" data-view="dashboard">
+      <h1>Dashboard</h1>
+      <div class="stat-grid">
+        <div class="stat"><div class="stat-label">Total Kode</div><div class="stat-num" id="sCodes">—</div></div>
+        <div class="stat ok"><div class="stat-label">Fresh</div><div class="stat-num" id="sFresh">—</div></div>
+        <div class="stat warn"><div class="stat-label">Pending</div><div class="stat-num" id="sPending">—</div></div>
+        <div class="stat bad"><div class="stat-label">Expired</div><div class="stat-num" id="sExpired">—</div></div>
+        <div class="stat"><div class="stat-label">Used</div><div class="stat-num" id="sUsed">—</div></div>
+        <div class="stat"><div class="stat-label">Admin</div><div class="stat-num" id="sAdmins">—</div></div>
+        <div class="stat"><div class="stat-label">Log Verifikasi</div><div class="stat-num" id="sSubs">—</div></div>
+      </div>
+    </section>
+
+    <!-- CODES -->
+    <section class="view" data-view="codes">
+      <h1>Kode Seleksi</h1>
+      <div class="toolbar">
+        <button class="btn" id="btnRefreshCodes">Refresh</button>
+        <button class="btn owner-only" id="btnAddCodes">Tambah Kode</button>
+        <button class="btn owner-only danger" id="btnResetCodes">Reset Semua → Fresh</button>
+        <button class="btn owner-only danger" id="btnRegenCodes">Regenerate 40</button>
+      </div>
+      <div class="table-wrap"><table id="tblCodes"><thead><tr><th>Kode</th><th>Status</th><th>Username CN</th><th>Bound</th><th>Used</th><th></th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <!-- SUBMISSIONS -->
+    <section class="view" data-view="submissions">
+      <h1>Log Verifikasi</h1>
+      <div class="toolbar">
+        <button class="btn" id="btnRefreshSubs">Refresh</button>
+        <button class="btn owner-only danger" id="btnClearSubs">Bersihkan Log</button>
+      </div>
+      <div class="table-wrap"><table id="tblSubs"><thead><tr><th>Waktu</th><th>Kode</th><th>CN</th><th>Nickname</th><th>VT</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <!-- FLOW -->
+    <section class="view owner-only" data-view="flow">
+      <h1>Sistem Seleksi</h1>
+      <div class="card-form">
+        <div class="row">
+          <label><input type="checkbox" id="cfgRequireCn" /> Wajibkan verifikasi CN</label>
+        </div>
+        <div class="row">
+          <label><input type="checkbox" id="cfgRequireVt" /> Wajibkan verifikasi VT</label>
+        </div>
+        <div class="row">
+          <label><input type="checkbox" id="cfgResurrect" /> Kode kembali fresh setelah sukses</label>
+        </div>
+        <div class="row"><label>Hashtag wajib</label><input id="cfgHashtag" type="text" /></div>
+        <div class="row"><label>Nickname TikTok wajib mengandung</label><input id="cfgNickname" type="text" /></div>
+        <div class="row"><label>Link grup utama</label><input id="cfgInvite" type="text" /></div>
+        <div class="row"><label>TTL kode pending (menit)</label><input id="cfgPendingTtl" type="number" min="1" /></div>
+        <div class="row"><button class="btn primary" id="btnSaveFlow">Simpan</button></div>
+        <div class="msg" id="msgFlow"></div>
+      </div>
+    </section>
+
+    <!-- SITE -->
+    <section class="view owner-only" data-view="site">
+      <h1>Situs & Tampilan</h1>
+      <div class="card-form">
+        <div class="row"><label>Judul situs</label><input id="cfgTitle" type="text" /></div>
+        <div class="row"><label>Subjudul</label><input id="cfgSubtitle" type="text" /></div>
+        <div class="row"><label>Status badge</label><input id="cfgStatus" type="text" /></div>
+        <div class="row"><label>Footer</label><input id="cfgFooter" type="text" /></div>
+        <div class="row"><button class="btn primary" id="btnSaveSite">Simpan</button></div>
+        <div class="msg" id="msgSite"></div>
+      </div>
+    </section>
+
+    <!-- NOTIF -->
+    <section class="view owner-only" data-view="notif">
+      <h1>Notifikasi Portal</h1>
+      <div class="card-form">
+        <div class="row"><label><input type="checkbox" id="cfgNotifEnabled" /> Aktifkan notifikasi banner di portal</label></div>
+        <div class="row"><label>Tipe</label>
+          <select id="cfgNotifType">
+            <option value="info">Info</option>
+            <option value="warn">Peringatan</option>
+            <option value="err">Error</option>
+          </select>
+        </div>
+        <div class="row"><label>Pesan</label><textarea id="cfgNotifMsg" rows="3"></textarea></div>
+        <div class="row"><button class="btn primary" id="btnSaveNotif">Simpan</button></div>
+        <div class="msg" id="msgNotif"></div>
+      </div>
+    </section>
+
+    <!-- ADMINS -->
+    <section class="view owner-only" data-view="admins">
+      <h1>Kelola Admin</h1>
+      <div class="card-form">
+        <div class="row"><label>Username admin baru</label><input id="newAdminUser" type="text" /></div>
+        <div class="row"><label>Password</label><input id="newAdminPass" type="password" /></div>
+        <div class="row"><button class="btn primary" id="btnCreateAdmin">Buat Admin</button></div>
+        <div class="msg" id="msgAdmin"></div>
+      </div>
+      <div class="table-wrap"><table id="tblAdmins"><thead><tr><th>Username</th><th>Status</th><th>Dibuat</th><th>Aksi</th></tr></thead><tbody></tbody></table></div>
+    </section>
+  </main>
+</div>
+
+<script src="panel.js"></script>
+</body>
+</html>

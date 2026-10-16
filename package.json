@@ -1,0 +1,16 @@
+{
+  "name": "seleksi-kekkai-family",
+  "version": "1.0.0",
+  "description": "Verification portal & management panel for Kekkai Family community",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@upstash/redis": "^1.34.0",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.19.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

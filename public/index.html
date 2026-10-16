@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Seleksi Kekkai Family</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="bg-glow"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-dot"></div>
+    <div>
+      <div class="brand-title" id="brandTitle">Seleksi Kekkai Family</div>
+      <div class="brand-sub" id="brandSub">Verification Portal · Community</div>
+    </div>
+  </div>
+  <div class="status-pill" id="statusPill"><span class="pulse"></span> <span id="statusText">Live</span></div>
+</header>
+
+<main class="shell">
+  <div class="notice hidden" id="notice"></div>
+
+  <div class="progress">
+    <div class="dot" data-step="1"><span>1</span><em>Access</em></div>
+    <div class="bar"></div>
+    <div class="dot" data-step="2"><span>2</span><em>CN</em></div>
+    <div class="bar"></div>
+    <div class="dot" data-step="3"><span>3</span><em>VT</em></div>
+    <div class="bar"></div>
+    <div class="dot" data-step="4"><span>4</span><em>Group</em></div>
+  </div>
+
+  <section class="card step" id="step1">
+    <div class="step-tag">Langkah 01 · Access</div>
+    <h2>Masukkan kode seleksi</h2>
+    <p class="muted">Gunakan kode yang dikirim bot di grup seleksi. Kode bersifat pribadi, hanya bisa dipakai <b>1x</b>, dan akan <b>basi</b> jika kamu keluar dari link seleksi sebelum selesai.</p>
+    <div class="field"><input id="codeInput" type="text" placeholder="KEKKAI-XXXXX" autocomplete="off" spellcheck="false" /></div>
+    <button class="btn primary" id="btnCode">Verifikasi Kode</button>
+    <div class="msg" id="msg1"></div>
+  </section>
+
+  <section class="card step hidden" id="step2">
+    <div class="step-tag">Langkah 02 · Identity</div>
+    <h2>Verifikasi CN</h2>
+    <p class="muted">Masukkan username TikTok. Sistem akan mengecek nickname akun untuk memastikan CN sudah terpasang.</p>
+    <div class="field"><input id="cnInput" type="text" placeholder="@username" autocomplete="off" spellcheck="false" /></div>
+    <button class="btn primary" id="btnCn">Cek Nickname</button>
+    <div class="msg" id="msg2"></div>
+  </section>
+
+  <section class="card step hidden" id="step3">
+    <div class="step-tag">Langkah 03 · Content</div>
+    <h2>Verifikasi VT</h2>
+    <p class="muted">Masukkan link video TikTok (VT) yang sudah diposting. Sistem akan mengecek caption video untuk memastikan hashtag <b id="hashtagHint">#kekkaifamily</b> sudah digunakan.</p>
+    <div class="field"><input id="vtInput" type="text" placeholder="https://www.tiktok.com/@user/video/..." autocomplete="off" spellcheck="false" /></div>
+    <button class="btn primary" id="btnVt">Cek Caption</button>
+    <div class="msg" id="msg3"></div>
+  </section>
+
+  <section class="card step hidden" id="step4">
+    <div class="step-tag">Langkah 04 · Group</div>
+    <h2>Masuk Grup Utama</h2>
+    <p class="muted">Verifikasi CN dan VT berhasil. Silakan masuk ke grup utama melalui tombol di bawah. Setelah kamu mengirim request join, bot akan otomatis menyetujui permintaanmu.</p>
+    <a class="btn primary wide" id="joinBtn" href="#" target="_blank" rel="noopener">Masuk Grup Utama</a>
+    <div class="msg warn">Jangan bagikan kode seleksi kepada orang lain.</div>
+  </section>
+
+  <section class="card success hidden" id="success">
+    <div class="check-wrap">
+      <svg viewBox="0 0 52 52" class="check">
+        <circle cx="26" cy="26" r="24" />
+        <path d="M14 27 L23 35 L38 19" />
+      </svg>
+    </div>
+    <div class="step-tag center">Seleksi Berhasil</div>
+    <h2 class="center">Selesai!</h2>
+    <p class="muted center">Request masuk grup sudah diproses. Setelah request join diterima, bot akan otomatis menyetujui kamu masuk ke grup utama.</p>
+    <p class="muted center small">Jangan bagikan kode seleksi kepada orang lain.</p>
+  </section>
+</main>
+
+<footer class="foot" id="footerText">✦ Seleksi Kekkai Family</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
