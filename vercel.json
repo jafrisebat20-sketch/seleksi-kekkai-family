@@ -1,5 +1,4 @@
 {
-  "outputDirectory": "public",
   "rewrites": [
     { "source": "/panel", "destination": "/panel.html" },
     { "source": "/panel/(.*)", "destination": "/panel.html" }
